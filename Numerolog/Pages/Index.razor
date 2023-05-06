@@ -1,0 +1,91 @@
+﻿@page "/"
+@inject Alphabet Alphabet
+
+<PageTitle>Numerolog</PageTitle>
+
+<div class="d-flex">
+    <h1 title="Verze 2023.5">Duchovní číslověda</h1>
+    <p title="duchovně přijatá Lucienem Siffridem a Hermannem Wenngem z kruhu Pána Abdrushina"
+       class="ms-auto">
+        Německá abeceda
+    </p>
+</div>
+
+<div class="d-flex flex-column d-print-none">
+    @if (result?.SourceIsLetters == false) {
+        <label class="align-self-end">
+            Zobrazit podrobnosti
+            <InputCheckbox @bind-Value="showDetails" />
+        </label>
+    }
+    <InputTextArea class="w-100"
+                   title="Zadejte německý text"
+                   Value="@text"
+                   ValueExpression="() => text"
+                   ValueChanged="OnTextChanged"
+                   @oninput="OnTextChanged" />
+</div>
+
+@if (result is null)
+    return;
+
+<table class="table table-sm table-hover">
+    <thead>
+        @Render(true, "Text", "Trojčíslí", "Číslo")
+        @Render(true, result)
+    </thead>
+    <tbody>
+        @if (result.HasSource) {
+            foreach (var source in result.Source) {
+                @Render(false, source, 1)
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    RenderFragment Render(bool header, TextNumber result, byte level = 0) => __builder =>
+    {
+        string? text = null;
+        foreach (var item in result.Letters.JoinByHasNumber()) {
+            text += item.HasNumber ?
+                item.Text :
+                UnknownLetter(item.Text);
+        }
+        text = text.WithHtmlLines();
+        string? number = result.Number?.ValueText.Replace("0", UnknownLetter("0"));
+        @Render(
+            header,
+            text,
+            number,
+            result.Number?.SingleDigitSumText,
+            level)
+        if (!header &&
+            showDetails &&
+            result.HasSource) {
+            foreach (var item in result.Source)
+                @Render(false, item, (byte)(level + 1))
+        }
+    };
+
+    string? UnknownLetter(string? text) => $"<span class=\"opacity-50\">{text}</span>";
+
+    RenderFragment Render(bool header, string? text, string? number, string? digit, byte level = 0) => __builder =>
+    {
+        for (int i = 0; i < level; i++) {
+            text = "<span class='ms-5'/>" + text;
+        }
+        <tr>
+            @if (header) {
+                <th>@((MarkupString)text!)</th>
+                <th class="text-end align-top">@((MarkupString)number!)</th>
+                <th class="text-end align-top">@((MarkupString)digit!)</th>
+            }
+            else {
+                <td>@((MarkupString)text!)</td>
+                <td class="text-end">@((MarkupString)number!)</td>
+                <td class="text-end">@((MarkupString)digit!)</td>
+            }
+        </tr>
+    };
+}
