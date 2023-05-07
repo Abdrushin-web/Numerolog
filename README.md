@@ -3,7 +3,7 @@
 Numerologie německého jazyka duchovně přijatá Lucienem Siffridem a Hermannem Wenngem z kruhu Pána Abdrushina.
 - Původní [abeceda](Numerology/Alphabets.cs#:~:text=static%20readonly%20Alphabet-,German,-%3D%20new()) byla rozšířena o písmeno ß s číselnou hodnotou dvou s = 1 + 1 = 2.
 
-Aplikace je dostupná na adrese https://numerolog.vzestup.net a lze ji z prohlížeče nainstalovat a používat offline.
+Aplikace je dostupná na adrese https://numerolog.vzestup.net a lze ji z [prohlížeče nainstalovat](https://support.google.com/chrome/answer/9658361?hl=cs&co=GENIE.Platform%3DDesktop) a používat offline.
 
 ## Souvislosti
 
