@@ -5,8 +5,6 @@ Numerologie německého jazyka duchovně přijatá Lucienem Siffridem a Hermanne
 
 Aplikace je dostupná na adrese https://numerolog.vzestup.net:
 
-[![image](Numerolog.png)](https://numerolog.vzestup.net)
-
 ## Souvislosti
 
 Aplikace byla použita na výpočet [výstavby Poselství Grálu](https://abdrushin.one/cs/poselstvi_gralu/1931/vystavba#numerologie).
