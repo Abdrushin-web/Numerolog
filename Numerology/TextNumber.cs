@@ -71,9 +71,12 @@ namespace Numerology
         public IEnumerable<TextNumber> Letters => HasSource ?
             Source.SelectMany(i => i.Letters) :
             this.ToEnumerable();
-        public bool SourceIsLetters =>
-            HasSource &&
-            Source.SequenceEqual(Letters);
+
+        /// <summary>
+        /// Number of text levels this object represents
+        /// </summary>
+        /// <value>1 + (maximum <see cref="LevelCount"/> from <see cref="Source"/> if any, otherwise 0)</value>
+        public byte LevelCount => (byte)(1 + (Source?.Max(i => i.LevelCount) ?? 0));
 
         public TextNumber Join(IEnumerable<TextNumber> source)
         {

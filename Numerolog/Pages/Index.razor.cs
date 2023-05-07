@@ -12,6 +12,8 @@ namespace Numerolog.Pages
             result = Alphabet.ComputeLinesAndWords(value);
         }
 
+        private void ToggleShowDetails() => showDetails = !showDetails;
+
         private string text;
         private TextNumber? result;
         private bool showDetails;

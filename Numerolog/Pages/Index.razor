@@ -4,26 +4,47 @@
 <PageTitle>Numerolog</PageTitle>
 
 <div class="d-flex">
-    <h1 title="Verze 2023.5">Duchovní číslověda</h1>
-    <p title="duchovně přijatá Lucienem Siffridem a Hermannem Wenngem z kruhu Pána Abdrushina"
-       class="ms-auto">
-        Německá abeceda
-    </p>
+    <h1>Numerolog - duchovní číslověda</h1>
+    <span class="ms-auto text-end">
+        <a href="https://github.com/Abdrushin-web/Numerolog" target="_blank">Verze: 2023.5.7</a><br/>
+        <span title="Numerologie německého jazyka duchovně přijatá Lucienem Siffridem a Hermannem Wenngem z kruhu Pána Abdrushina">Německá abeceda</span>
+    </span>
 </div>
 
 <div class="d-flex flex-column d-print-none">
-    @if (result?.SourceIsLetters == false) {
-        <label class="align-self-end">
-            Zobrazit podrobnosti
-            <InputCheckbox @bind-Value="showDetails" />
-        </label>
-    }
-    <InputTextArea class="w-100"
+    <InputTextArea class="focused w-100"
                    title="Zadejte německý text"
                    Value="@text"
                    ValueExpression="() => text"
                    ValueChanged="OnTextChanged"
                    @oninput="OnTextChanged" />
+    @if (result != null) {
+        <div class="ms-auto d-flex">
+            @if (result?.LevelCount > 2) {
+                if (showDetails) {
+                    <button class="btn"
+                            @onclick="ToggleShowDetails">
+                        <span class="oi oi-chevron-top"
+                              title="Skrýt podrobnosti"
+                              aria-hidden="true" />
+                    </button>
+                } else {
+                    <button class="btn"
+                            @onclick="ToggleShowDetails">
+                        <span class="oi oi-chevron-bottom"
+                              title="Zobrazit podrobnosti"
+                              aria-hidden="true" />
+                    </button>
+                }
+            }
+            <button class="btn"
+                    onclick="window.print()">
+                <span class="oi oi-print"
+                      title="Vytisknout"
+                      aria-hidden="true"/>
+            </button>
+        </div>
+    }
 </div>
 
 @if (result is null)
@@ -31,7 +52,11 @@
 
 <table class="table table-sm table-hover">
     <thead>
-        @Render(true, "Text", "Trojčíslí", "Číslo")
+        @Render(
+            true,
+            "Text",
+            "<span title='Trojčíslí spočítané podle číselné abecedy skládající se z cifer jemné, střední a hrubé úrovně'>Trojčíslí</span>",
+            "<span title='Jednociferný součet cifer trojčíslí'>Číslo</span>")
         @Render(true, result)
     </thead>
     <tbody>
