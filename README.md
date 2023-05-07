@@ -19,7 +19,7 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 
 ## Technologie
 
-Aplikace je napsaná v .NET 7 a skládá z těchto částí:
+Aplikace je napsaná v .NET 7 a skládá se z těchto částí:
 - Numerology
   - C# knihovna pro numerologické výpočty
 - Numerolog
