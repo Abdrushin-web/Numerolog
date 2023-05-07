@@ -2,9 +2,9 @@
 
 Numerologie německého jazyka duchovně přijatá Lucienem Siffridem a Hermannem Wenngem z kruhu Pána Abdrushina.
 
-Aplikace je dostupná na adrese https://numerolog.vzestup.net.
+Aplikace je dostupná na adrese https://numerolog.vzestup.net:
 
-![image](Numerolog.png)
+[![image](Numerolog.png)](https://numerolog.vzestup.net)
 
 ## Historie
 
