@@ -77,7 +77,7 @@ namespace Numerology
         /// <see cref="Text"/> number if known, otherwise null
         /// </summary>
         public Number? Number { get; }
-        
+
         [MemberNotNullWhen(true, nameof(Number))]
         public bool HasNumber => Number != null;
 
@@ -109,7 +109,7 @@ namespace Numerology
         public byte LevelCount => (byte)(1 + (Source?.Max(i => i.LevelCount) ?? 0));
 
         #region ToString
-        
+
         public string TextWithNumber => HasSource ?
             ToStringLocal(Source.Select(i => i.ToStringLocal(i.Text, false)).JoinLines()) :
             ToStringLocal();
@@ -139,22 +139,27 @@ namespace Numerology
             Func<string?, string?>? formatUnknown = null,
             CancellationToken cancellation = default)
         {
-            string? text = null;
-            if (formatKnown is null &&
-                formatUnknown is null) {
-                text = Text;
-            }
-            else {
-                foreach (var item in Letters.JoinByHasNumber(cancellation)) {
-                    if (cancellation.IsCancellationRequested)
-                        break;
-                    text += item.HasNumber ?
-                        Format(item.Text, formatKnown) :
-                        Format(item.Text, formatUnknown);
+            var cacheKey = (formatKnown, formatUnknown);
+            if (!getTextCache.TryGetValue(cacheKey, out var text)) {
+                if (formatKnown is null &&
+                    formatUnknown is null) {
+                    text = Text;
                 }
+                else {
+                    foreach (var item in Letters.JoinByHasNumber(cancellation)) {
+                        if (cancellation.IsCancellationRequested)
+                            break;
+                        text += item.HasNumber ?
+                            Format(item.Text, formatKnown) :
+                            Format(item.Text, formatUnknown);
+                    }
+                }
+                getTextCache.Add(cacheKey, text);
             }
             return text;
         }
+
+        private readonly Dictionary<(Func<string?, string?>?, Func<string?, string?>?), string?> getTextCache = new();
 
         internal static string? Format(string text, Func<string?, string?>? format) => format is null ?
             text :

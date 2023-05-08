@@ -14,6 +14,8 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 
 ## Historie
 
+- 2023.5.9
+  - zadávání názvu je při větších výpočtech plynulejší
 - 2023.5.8
   - adresa stránky obsahuje její obsah pro možnost sdílení
   - optimalizace výpočtu na pozadí
@@ -35,4 +37,6 @@ Aplikace je napsaná v .NET 7 a skládá se z těchto částí:
 
 Použití aplikace a zdrojového kódu v souladu s Božími zákony.
 
-Autor: Marek Ištvánek
+## Autor
+
+[Marek Ištvánek](https://duchovnipodpora.vzestup.net/user/rolfik)
