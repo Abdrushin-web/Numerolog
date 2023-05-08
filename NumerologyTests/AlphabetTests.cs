@@ -7,7 +7,7 @@ namespace NumerologyTests
     public class AlphabetTests
     {
         [Fact]
-        public void Compute()
+        public void ComputeLetters()
         {
             var result = Alphabets.German.ComputeLetters("Abdruschin");
             AssertResult(result, 356, 5);

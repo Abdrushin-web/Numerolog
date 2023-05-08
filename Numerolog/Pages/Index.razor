@@ -1,24 +1,35 @@
 ﻿@page "/"
 @inject Alphabet Alphabet
+@inject NavigationManager Navigation
 
-<PageTitle>Numerolog</PageTitle>
+<PageTitle>@Title</PageTitle>
 
-<div class="d-flex">
+<div class="d-flex d-print-none">
     <h1>Numerolog - duchovní číslověda</h1>
     <span class="ms-auto text-end">
-        <a href="https://github.com/Abdrushin-web/Numerolog" target="_blank">Verze: 2023.5.7</a><br/>
+        <a href="https://github.com/Abdrushin-web/Numerolog" target="_blank">Verze: @Application.Version</a><br/>
         <span title="Numerologie německého jazyka duchovně přijatá Lucienem Siffridem a Hermannem Wenngem z kruhu Pána Abdrushina">Německá abeceda</span>
     </span>
 </div>
+
+@{
+    var computing = Computing;
+    var cancellation = this.cancellation?.Token ?? default;
+}
 
 <div class="d-flex flex-column d-print-none">
     <InputTextArea class="focused w-100"
                    title="Zadejte německý text"
                    Value="@text"
                    ValueExpression="() => text"
-                   ValueChanged="OnTextChanged"
                    @oninput="OnTextChanged" />
-    @if (result != null) {
+    @if (computing) {
+        <div class="d-flex justify-content-center mt-5">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Počítám ...</span>
+            </div>
+        </div>
+    } else if (result != null) {
         <div class="ms-auto d-flex">
             @if (result?.LevelCount > 2) {
                 if (showDetails) {
@@ -47,8 +58,10 @@
     }
 </div>
 
-@if (result is null)
+@if (result is null ||
+    computing) {
     return;
+}
 
 <table class="table table-sm table-hover">
     <thead>
@@ -62,23 +75,26 @@
     <tbody>
         @if (result.HasSource) {
             foreach (var source in result.Source) {
-                @Render(false, source, 1)
+                if (cancellation.IsCancellationRequested)
+                    break;
+                @Render(false, source, 1, cancellation)
             }
         }
     </tbody>
 </table>
 
 @code {
-    RenderFragment Render(bool header, TextNumber result, byte level = 0) => __builder =>
+    RenderFragment Render(bool header, TextNumber result, byte level = 0, CancellationToken cancellation = default) => __builder =>
     {
-        string? text = null;
-        foreach (var item in result.Letters.JoinByHasNumber()) {
-            text += item.HasNumber ?
-                item.Text :
-                UnknownLetter(item.Text);
-        }
+        var text = result.GetText(null, UnknownLetter, cancellation);
+        if (cancellation.IsCancellationRequested)
+            return;
         text = text.WithHtmlLines();
-        string? number = result.Number?.ValueText.Replace("0", UnknownLetter("0"));
+        if (cancellation.IsCancellationRequested)
+            return;
+        var number = result.Number?.GetValueText(null, UnknownLetter);
+        if (cancellation.IsCancellationRequested)
+            return;
         @Render(
             header,
             text,
@@ -88,8 +104,11 @@
         if (!header &&
             showDetails &&
             result.HasSource) {
-            foreach (var item in result.Source)
+            foreach (var item in result.Source) {
+                if (cancellation.IsCancellationRequested)
+                    break;
                 @Render(false, item, (byte)(level + 1))
+            }
         }
     };
 

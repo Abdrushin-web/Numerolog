@@ -77,15 +77,19 @@ namespace Numerology
         /// <summary>
         /// Reads letters
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">Text</param>
+        /// <param name="cancellation">Optional cancellation</param>
         /// <returns>Known letters have non-null <see cref="TextNumber.Number"/> and unknown null one</returns>
-        public IEnumerable<TextNumber> Read(string? text)
+        public IEnumerable<TextNumber> Read(string? text, CancellationToken cancellation =default)
         {
             if (string.IsNullOrWhiteSpace(text))
                 yield break;
             int letterStart = 0;
-            while (ReadLetter(text, ref letterStart, out var letter))
+            while (ReadLetter(text, ref letterStart, out var letter)) {
+                if (cancellation.IsCancellationRequested)
+                    yield break;
                 yield return letter;
+            }
         }
 
         private bool ReadLetter(string text, ref int letterStart, [NotNullWhen(true)] out TextNumber? letter)

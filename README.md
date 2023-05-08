@@ -14,6 +14,11 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 
 ## Historie
 
+- 2023.5.8
+  - adresa stránky obsahuje její obsah pro možnost sdílení
+  - optimalizace výpočtu na pozadí
+  - signalizace průběhu výpočtu
+  - tisknutí jen textů s výpočty bez záhlaví aplikace
 - 2023.5.7
   - zveřejnění první verze
 
@@ -28,3 +33,5 @@ Aplikace je napsaná v .NET 7 a skládá se z těchto částí:
 ## Licence
 
 Použití aplikace a zdrojového kódu v souladu s Božími zákony.
+
+Autor: Marek Ištvánek
