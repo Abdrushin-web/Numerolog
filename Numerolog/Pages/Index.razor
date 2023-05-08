@@ -40,7 +40,7 @@
                 <span class="visually-hidden">Počítám ...</span>
             </div>
         </div>
-    } else if (result != null) {
+    } else if (HasResult) {
         <div class="ms-auto d-flex">
             @if (result?.LevelCount > 2) {
                 if (showDetails) {
@@ -69,10 +69,8 @@
     }
 </div>
 
-@if (result is null ||
-    computing) {
+@if (!HasResult || computing)
     return;
-}
 
 <table class="table table-sm table-hover">
     <thead>

@@ -75,11 +75,23 @@ namespace Numerolog.Pages
                 await SetResult();
         }
 
-        private string Title => !HasName && !HasText ?
-            Application.Name :
-            $"{(HasName ? name : text)!.
-                Replace(TextLines.Separator, " | ").
-                TrimToLength(100)} | {Application.Name}";
+        private string Title
+        {
+            get
+            {
+                const string separator = " | ";
+                var value = HasName || HasText ?
+                    (HasName ? name : text)!.
+                        Replace(TextLines.Separator, separator).
+                        TrimToLength(100) +
+                        separator :
+                        null;
+                if (HasResult && result.HasNumber)
+                    value += $"{result.Number.ValueText} = {result.Number.SingleDigitSumText}{separator}";
+                value += Application.Name;
+                return value;
+            }
+        }
 
         #region Uri
 
@@ -101,6 +113,9 @@ namespace Numerolog.Pages
         #endregion
 
         #region Result
+
+        [MemberNotNullWhen(true, nameof(result))]
+        private bool HasResult => result != null;
 
         private bool Computing => cancellation != null;
 
