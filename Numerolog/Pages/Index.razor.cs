@@ -5,11 +5,32 @@ namespace Numerolog.Pages
 {
     public partial class Index
     {
+        #region Name
+
+        [Parameter]
+        [SupplyParameterFromQuery]
+        public string? Name { get; set; }
+
+        private bool HasName => !string.IsNullOrWhiteSpace(name);
+
+        private void OnNameChanged(ChangeEventArgs a) => OnNameChanged((string)a.Value!);
+        private void OnNameChanged(string value)
+        {
+            name = value;
+            UpdateUri();
+        }
+
+        private string? name;
+
+        #endregion
+
         #region Text
 
         [Parameter]
         [SupplyParameterFromQuery]
         public string? Text { get; set; }
+
+        private bool HasText => !string.IsNullOrWhiteSpace(text);
 
         private Task OnTextChanged(ChangeEventArgs a) => OnTextChanged((string)a.Value!);
         private async Task OnTextChanged(string value)
@@ -42,6 +63,7 @@ namespace Numerolog.Pages
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
+            name = Name;
             text = Text;
             showDetails = ShowDetails;
             if (uriUpdated)
@@ -50,15 +72,16 @@ namespace Numerolog.Pages
                 await SetResult();
         }
 
-        private string Title => string.IsNullOrWhiteSpace(text) ?
+        private string Title => !HasName && !HasText ?
             Application.Name :
-            $"{text.TrimToLength(100)} | {Application.Name}";
+            $"{(HasName ? name : text).TrimToLength(100)} | {Application.Name}";
 
         #region Uri
 
         private string Uri => Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>
         {
-            [nameof(Text)] = string.IsNullOrWhiteSpace(text) ? null : text,
+            [nameof(Name)] = HasName ? name : null,
+            [nameof(Text)] = HasText ? text : null,
             [nameof(ShowDetails)] = showDetails ? true : null
         });
 

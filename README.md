@@ -19,6 +19,7 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
   - optimalizace výpočtu na pozadí
   - signalizace průběhu výpočtu
   - tisknutí jen textů s výpočty bez záhlaví aplikace
+  - možnost zadat název výpočtu zobrazený v titulku stránky a při tisku
 - 2023.5.7
   - zveřejnění první verze
 

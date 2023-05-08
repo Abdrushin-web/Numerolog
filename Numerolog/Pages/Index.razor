@@ -18,11 +18,22 @@
 }
 
 <div class="d-flex flex-column d-print-none">
-    <InputTextArea class="focused w-100"
-                   title="Zadejte německý text"
-                   Value="@text"
-                   ValueExpression="() => text"
-                   @oninput="OnTextChanged" />
+    <label>
+        Název:
+        <InputText class="w-100"
+                   title="Zadejte volitelný název textu"
+                   Value=@name
+                   ValueExpression="() => name"
+                   @oninput="OnNameChanged" />
+    </label>
+    <label>
+        Text:
+        <InputTextArea class="focused w-100"
+                       title="Zadejte německý text"
+                       Value="@text"
+                       ValueExpression="() => text"
+                       @oninput="OnTextChanged" />
+    </label>
     @if (computing) {
         <div class="d-flex justify-content-center mt-5">
             <div class="spinner-border" role="status">
@@ -61,6 +72,10 @@
 @if (result is null ||
     computing) {
     return;
+}
+
+@if (HasName) {
+    <h1 class="d-none d-print-block">@name</h1>
 }
 
 <table class="table table-sm table-hover">
