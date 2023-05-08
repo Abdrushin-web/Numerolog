@@ -20,11 +20,11 @@
 <div class="d-flex flex-column d-print-none">
     <label>
         Název:
-        <InputText class="w-100"
-                   title="Zadejte volitelný název textu"
-                   Value=@name
-                   ValueExpression="() => name"
-                   @oninput="OnNameChanged" />
+        <InputTextArea class="w-100"
+                       title="Zadejte volitelný název textu"
+                       Value=@name
+                       ValueExpression="() => name"
+                       @oninput="OnNameChanged" />
     </label>
     <label>
         Text:
@@ -74,12 +74,14 @@
     return;
 }
 
-@if (HasName) {
-    <h1 class="d-none d-print-block b" style="break-after: avoid">@name</h1>
-}
-
 <table class="table table-sm table-hover">
     <thead>
+        @if (HasName) {
+            @Render(
+                true,
+                $"<h1>{name.WithHtmlLines()}</h1>")
+        }
+
         @Render(
             true,
             "Text",
@@ -129,16 +131,21 @@
 
     string? UnknownLetter(string? text) => $"<span class=\"opacity-50\">{text}</span>";
 
-    RenderFragment Render(bool header, string? text, string? number, string? digit, byte level = 0) => __builder =>
+    RenderFragment Render(bool header, string? text, string? number = null, string? digit = null, byte level = 0) => __builder =>
     {
         for (int i = 0; i < level; i++) {
             text = "<span class='ms-5'/>" + text;
         }
         <tr>
             @if (header) {
-                <th>@((MarkupString)text!)</th>
-                <th class="text-end align-top">@((MarkupString)number!)</th>
-                <th class="text-end align-top">@((MarkupString)digit!)</th>
+                @if (number == null && digit == null) {
+                    <th colspan="3">@((MarkupString)text!)</th>
+
+                } else {
+                    <th>@((MarkupString)text!)</th>
+                    <th class="text-end align-top">@((MarkupString)number!)</th>
+                    <th class="text-end align-top">@((MarkupString)digit!)</th>
+                }
             }
             else {
                 <td>@((MarkupString)text!)</td>

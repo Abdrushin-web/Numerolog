@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Numerology;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Numerolog.Pages
 {
@@ -11,6 +12,7 @@ namespace Numerolog.Pages
         [SupplyParameterFromQuery]
         public string? Name { get; set; }
 
+        [MemberNotNullWhen(true, nameof(name))]
         private bool HasName => !string.IsNullOrWhiteSpace(name);
 
         private void OnNameChanged(ChangeEventArgs a) => OnNameChanged((string)a.Value!);
@@ -30,6 +32,7 @@ namespace Numerolog.Pages
         [SupplyParameterFromQuery]
         public string? Text { get; set; }
 
+        [MemberNotNullWhen(true, nameof(text))]
         private bool HasText => !string.IsNullOrWhiteSpace(text);
 
         private Task OnTextChanged(ChangeEventArgs a) => OnTextChanged((string)a.Value!);
@@ -74,7 +77,9 @@ namespace Numerolog.Pages
 
         private string Title => !HasName && !HasText ?
             Application.Name :
-            $"{(HasName ? name : text).TrimToLength(100)} | {Application.Name}";
+            $"{(HasName ? name : text)!.
+                Replace(TextLines.Separator, " | ").
+                TrimToLength(100)} | {Application.Name}";
 
         #region Uri
 

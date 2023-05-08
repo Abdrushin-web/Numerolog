@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Numerology
 {
@@ -76,6 +77,8 @@ namespace Numerology
         /// <see cref="Text"/> number if known, otherwise null
         /// </summary>
         public Number? Number { get; }
+        
+        [MemberNotNullWhen(true, nameof(Number))]
         public bool HasNumber => Number != null;
 
         #region Source
