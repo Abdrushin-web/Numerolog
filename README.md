@@ -17,6 +17,7 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 - 2023.5.9
   - zadávání názvu je při větších výpočtech plynulejší
   - výsledné trojčíslí a číslo v titulku stránky
+  - zřetelnější ikona na různých pozadích
 - 2023.5.8
   - adresa stránky obsahuje její obsah pro možnost sdílení
   - optimalizace výpočtu na pozadí
