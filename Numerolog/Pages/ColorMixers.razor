@@ -1,0 +1,51 @@
+﻿@page "/colorMixers"
+@inject IEnumerable<IRGBInterpolation> Mixers
+
+@if (Mixers?.Any() != true)
+    return;
+
+<h1>Slučování barev</h1>
+
+<div class="d-flex align-items-center">
+    <label>
+        Barva 1:
+        <ColorSelector Title="Barva 1"
+                       @bind-Color="color1" />
+    </label>
+    <label>
+        Barva 2:
+        <ColorSelector Title="Barva 2"
+                       @bind-Color="color2" />
+    </label>
+    <label>
+        Poměr: @Ratio
+        <input type="range"
+               class="form-range"
+               min="0" max="1"
+               step="0.01"
+               title="@Ratio"
+               @bind-value="@Ratio" />
+    </label>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Slučovač</th>
+            <th>Výsledná barva</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mixer in Mixers) {
+            <tr>
+                <td>@mixer.Name</td>
+                <td>
+                    <ColorMixer Mixer="mixer"
+                            Color1="@color1"
+                            Color2="@color2"
+                            Ratio="ratio" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

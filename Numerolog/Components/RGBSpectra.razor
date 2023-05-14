@@ -1,0 +1,23 @@
+﻿@if (List is null)
+    return;
+
+<table class="spectra table table-sm table-responsive">
+    <thead>
+        <tr>
+            <th rowspan="2">Název</th>
+            <th colspan="@Count">Barva</th>
+        </tr>
+        <tr>
+            @for (uint i = 1; i <= Count; i++) {
+                <th>@i</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var spectrum in List) {
+            <RGBSpectrum Value="spectrum"
+                     Count="Count"
+                     Start="Start" />
+        }
+    </tbody>
+</table>

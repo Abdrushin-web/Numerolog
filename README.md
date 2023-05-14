@@ -12,9 +12,18 @@ Aplikace byla použita na výpočet [výstavby Poselství Grálu](https://abdrus
 Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerológia Slovenov - Nová Slovenská číslovéda](https://yaspis.sk/programy-jaspis#:~:text=Nov%C3%A9%20Hodiny%20Slovenov%C2%A0%20%C2%BB-,Nov%C3%A1%20Numerol%C3%B3gia%20Slovenov,-%2D%20Nov%C3%A1%20Slovensk%C3%A1%20%C4%8D%C3%ADslov%C3%A9da).
 - Nepodporuje německé znaky Ä, Ü, Ö, ß.
 
+## Části aplikace
+
+| Adresa | Význam |
+| ---    | ------ |
+| [/](https://numerolog.vzestup.net/) | Výpočet numerologie textu |
+| [/spectra](https://numerolog.vzestup.net/spectra) | Test barevných spekter |
+| [/colorMixers](https://numerolog.vzestup.net/colorMixers) | Test slučování barev |
+
 ## Historie
 
-- 2023.5.9
+- 2023.5.14
+  - základní testování barevných spekter a slučování barev
   - zadávání názvu je při větších výpočtech plynulejší
   - výsledné trojčíslí a číslo v titulku stránky
   - zřetelnější ikona na různých pozadích

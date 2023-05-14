@@ -1,0 +1,22 @@
+﻿@if (Value is null ||
+     colors?.Any() != true)
+    return;
+
+<tr class="spectrum">
+    <td>@Value.Name</td>
+    @{
+        uint number = 1;
+        foreach (var color in colors) {
+            @Render(color, number++)
+        }
+    }
+</tr>
+
+@code {
+    RenderFragment Render(string color, uint number) => __builder =>
+    {
+        <td class="color"
+            style="background-color: @color"
+            title="@number"/>
+    };
+}

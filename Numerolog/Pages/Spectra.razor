@@ -1,0 +1,38 @@
+﻿@page "/Spectra"
+@inject IEnumerable<IRGBCircularSpectrum> List
+
+<h1>Spektra barev</h1>
+
+@if (List is null)
+    return;
+
+<div>
+    <label>
+        Počet barev:
+        <InputNumber @bind-Value="count"
+                     min="1"
+                     max="360" />
+    </label>
+    <label>
+        Začátek [°]:
+        <InputNumber @bind-Value="start"
+                     min="0"
+                     max="360" />
+    </label>
+    <label>
+        Jas [%]:
+        <InputNumber @bind-Value="Lightness"
+                     min="0"
+                     max="200" />
+    </label>
+    <label>
+        Barevnost [%]:
+        <InputNumber @bind-Value="Chroma"
+                     min="0"
+                     max="200" />
+    </label>
+</div>
+
+<RGBSpectra List="List"
+            Count="count"
+            Start="start" />

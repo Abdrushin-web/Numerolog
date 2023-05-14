@@ -1,0 +1,34 @@
+﻿@if (Color is null)
+    return;
+
+<button class="btn"
+        title="@Title"
+        @onclick="Open">
+    <div style="background-color: @Color"
+         class="colorPad" />
+</button>
+
+<ColorPicker Title="@Title"
+             MyColor="@Color"
+             IsOpened="open"
+             Closed="OnClosed" />
+
+@code {
+    [Parameter]
+    public string? Color { get; set; }
+    [Parameter]
+    public EventCallback<string> ColorChanged { get; set; }
+    [Parameter]
+    public string? Title { get; set; }
+
+    void Open() => open = true;
+
+    async Task OnClosed(string value)
+    {
+        Color = value;
+        open = false;
+        await ColorChanged.InvokeAsync(value);
+    }
+
+    bool open;
+}

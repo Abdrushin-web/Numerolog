@@ -1,0 +1,11 @@
+﻿.spectrum {
+    height: 55px;
+}
+
+    .spectrum .color {
+        min-width: 55px;
+    }
+
+    .spectrum td:first-of-type {
+        vertical-align: middle;
+    }
