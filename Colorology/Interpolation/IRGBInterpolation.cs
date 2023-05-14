@@ -1,6 +1,6 @@
 ﻿using Colourful;
 
-namespace Colorology
+namespace Colorology.Interpolation
 {
     /// <summary>
     /// Interpolates between 2 colors

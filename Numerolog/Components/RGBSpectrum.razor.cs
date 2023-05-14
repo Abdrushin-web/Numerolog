@@ -1,4 +1,5 @@
 using Colorology;
+using Colorology.Spectra;
 using Microsoft.AspNetCore.Components;
 using Spectrology;
 using System.Diagnostics.CodeAnalysis;

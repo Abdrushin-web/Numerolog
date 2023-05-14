@@ -1,7 +1,7 @@
 ﻿using Colourful;
 using Spectrology;
 
-namespace Colorology
+namespace Colorology.Interpolation
 {
     public class LChLinearInterpolation :
         IRGBInterpolation
@@ -20,7 +20,8 @@ namespace Colorology
             var ratio2 = ratio;
             var c1 = From.Convert(color1);
             var c2 = From.Convert(color2);
-            if (Math.Abs(c1.h - c2.h) > Circle.Degree.Full / 2) {
+            if (Math.Abs(c1.h - c2.h) > Circle.Degree.Full / 2)
+            {
                 if (c1.h > c2.h)
                     c1 = new(c1.L, c1.C, c1.h - Circle.Degree.Full);
                 else

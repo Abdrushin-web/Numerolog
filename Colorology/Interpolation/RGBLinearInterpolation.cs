@@ -1,6 +1,6 @@
 ﻿using Colourful;
 
-namespace Colorology
+namespace Colorology.Interpolation
 {
     public class RGBLinearInterpolation :
         IRGBInterpolation

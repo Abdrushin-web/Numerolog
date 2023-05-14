@@ -1,6 +1,6 @@
 ﻿using Colourful;
 
-namespace Colorology
+namespace Colorology.Spectra
 {
     public class LChuvCircularSpectrum :
         LCCircularSpectrum<LChuvColor>
@@ -14,6 +14,6 @@ namespace Colorology
 
         public override string Name => "CIE LCh uv";
 
-        protected override LChuvColor GetSource(double degree) => new (Lightness, Chroma, degree);
+        protected override LChuvColor GetSource(double degree) => new(Lightness, Chroma, degree);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Colourful;
 
-namespace Colorology
+namespace Colorology.Spectra
 {
     public class LChabCircularSpectrum :
         LCCircularSpectrum<LChabColor>
@@ -14,6 +14,6 @@ namespace Colorology
 
         public override string Name => "CIE LCh ab";
 
-        protected override LChabColor GetSource(double degree) => new (Lightness, Chroma, degree);
+        protected override LChabColor GetSource(double degree) => new(Lightness, Chroma, degree);
     }
 }

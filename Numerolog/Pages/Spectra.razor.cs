@@ -1,4 +1,4 @@
-using Colorology;
+using Colorology.Spectra;
 
 namespace Numerolog.Pages
 {

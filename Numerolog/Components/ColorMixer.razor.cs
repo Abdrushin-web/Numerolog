@@ -1,4 +1,5 @@
 using Colorology;
+using Colorology.Interpolation;
 using Microsoft.AspNetCore.Components;
 
 namespace Numerolog.Components

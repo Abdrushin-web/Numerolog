@@ -1,4 +1,4 @@
-using Colorology;
+using Colorology.Spectra;
 using Microsoft.AspNetCore.Components;
 
 namespace Numerolog.Components

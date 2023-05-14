@@ -1,7 +1,7 @@
 ﻿using Colourful;
 using Spectrology;
 
-namespace Colorology
+namespace Colorology.Spectra
 {
     public abstract class RGBCircularSpectrum :
         CircularSpectrum<RGBColor>,

@@ -1,12 +1,14 @@
-﻿using Colourful;
+﻿using Colorology.Interpolation;
+using Colourful;
 using Spectrology;
+using System.Diagnostics.CodeAnalysis;
 
-namespace Colorology
+namespace Colorology.Spectra
 {
     public class InterpolatedCircularSpectrum :
         RGBCircularSpectrum
     {
-        public InterpolatedCircularSpectrum(string name, IRGBInterpolation interpolation, params RGBColor[] colors)
+        public InterpolatedCircularSpectrum(string name, [NotNull] IRGBInterpolation interpolation, params RGBColor[] colors)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
@@ -15,7 +17,7 @@ namespace Colorology
             if (colors.Length == 0)
                 throw new ArgumentException("At least one color is required", nameof(colors));
             this.name = name;
-            Interpolation = interpolation ?? throw new ArgumentNullException(nameof(interpolation));
+            Interpolation = interpolation;
             Colors = colors;
         }
 
@@ -48,7 +50,12 @@ namespace Colorology
 
         public override string Name => name;
 
-        public IRGBInterpolation Interpolation { get; }
+        [MemberNotNull(nameof(interpolation))]
+        public IRGBInterpolation Interpolation
+        {
+            get => interpolation;
+            set => interpolation = value ?? throw new ArgumentNullException(nameof(Interpolation));
+        }
         public IReadOnlyList<RGBColor> Colors { get; }
 
         protected override RGBColor DoGetValue(double degree)
@@ -67,5 +74,6 @@ namespace Colorology
         }
 
         string name;
+        IRGBInterpolation interpolation;
     }
 }
