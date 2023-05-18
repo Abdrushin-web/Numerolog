@@ -16,14 +16,17 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 
 | Adresa | Význam |
 | ---    | ------ |
-| [/](https://numerolog.vzestup.net/) | Výpočet numerologie textu |
-| [/spectra](https://numerolog.vzestup.net/spectra) | Test barevných spekter |
-| [/colorMixers](https://numerolog.vzestup.net/colorMixers) | Test slučování barev |
+| [/](https://numerolog.vzestup.net) | Výpočet numerologie textu |
+| [/ColorSpectra](https://numerolog.vzestup.net/ColorSpectra) | Test barevných spekter |
+| [/ColorMixers](https://numerolog.vzestup.net/ColorMixers) | Test slučování barev |
+| [/Tones](https://numerolog.vzestup.net/Tones) | Test zvukových tónů |
 
 ## Historie
 
-- 2023.5.14
-  - základní testování barevných spekter a slučování barev
+- 2023.5.19
+  - základní testování
+    -  barevných spekter a slučování barev
+    -  zvukových tónů
   - zadávání názvu je při větších výpočtech plynulejší
   - výsledné trojčíslí a číslo v titulku stránky
   - zřetelnější ikona na různých pozadích

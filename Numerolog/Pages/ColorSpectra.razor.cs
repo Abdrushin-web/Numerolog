@@ -2,7 +2,7 @@ using Colorology.Spectra;
 
 namespace Numerolog.Pages
 {
-    public partial class Spectra
+    public partial class ColorSpectra
     {
         protected override void OnInitialized()
         {

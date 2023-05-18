@@ -1,0 +1,62 @@
+﻿@page "/Tones"
+
+<h1>Tóny</h1>
+
+<div class="mb-1">
+    <label>
+        Zesílení:
+        <InputNumber @bind-Value="gain"
+                     min="0"
+                     max="1"
+                     step="0.01" />
+    </label>
+</div>
+<div class="mb-1">
+    <label>
+        Frekvence [Hz]:
+        <InputNumber @bind-Value="frequency"
+                     min="@MinFrequency"
+                     max="@MaxFrequency"/>
+    </label>
+</div>
+
+<TonePlayer Frequency="frequency"
+            Gain="gain" />
+
+<fieldset class="mb-1">
+    Akord:
+    <label>
+        Frekvence 1 [Hz]:
+        <InputNumber @bind-Value="frequency1"
+                     min="@MinFrequency"
+                     max="@MaxFrequency" />
+    </label>
+    <label>
+        Frekvence 2 [Hz]:
+        <InputNumber @bind-Value="frequency2"
+                     min="@MinFrequency"
+                     max="@MaxFrequency" />
+    </label>
+    <label>
+        Frekvence 3 [Hz]:
+        <InputNumber @bind-Value="frequency3"
+                     min="@MinFrequency"
+                     max="@MaxFrequency" />
+    </label>
+</fieldset>
+
+<TonePlayer Frequencies="new []{ frequency1, frequency2, frequency3 }"
+            Gain="gain" />
+
+@code {
+    const double MinFrequency = 20;
+    const double MaxFrequency = 20000;
+
+    double
+        gain = 1,
+        frequency = TonePlayer.DefaultFrequency, // A
+        // Pytagorean chord C dur
+        frequency1 = 1000, // C
+        frequency2 = 1250, // E
+        frequency3 = 1500; // G
+}
