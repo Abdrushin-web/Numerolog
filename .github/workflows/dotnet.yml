@@ -23,7 +23,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
@@ -34,5 +34,5 @@ jobs:
         # Artifact name
         name: app
         # A file, directory or wildcard pattern that describes what to upload
-        path: '**/publish/wwwroot/**'
+        path: '**/publish/wwwroot/'
         retention-days: 100
