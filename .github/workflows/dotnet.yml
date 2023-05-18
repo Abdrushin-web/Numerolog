@@ -34,5 +34,5 @@ jobs:
         # Artifact name
         name: app
         # A file, directory or wildcard pattern that describes what to upload
-        path: '**/publish/**'
+        path: '**/publish/wwwroot/**'
         retention-days: 100
