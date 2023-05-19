@@ -40,4 +40,8 @@
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo &quot;ProjectDir=$(ProjectDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)\Audiology\SoundFonts\TimGM6mb.sf2&quot; &quot;$(ProjectDir)\wwwroot\SoundFonts\&quot;" />
+  </Target>
+
 </Project>

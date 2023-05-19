@@ -23,10 +23,10 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 
 ## Historie
 
-- 2023.5.19
+- 2023.5.22
   - základní testování
     -  barevných spekter a slučování barev
-    -  zvukových tónů
+    -  zvukových tónů pomocí MIDI/WAV syntézy
   - zadávání názvu je při větších výpočtech plynulejší
   - výsledné trojčíslí a číslo v titulku stránky
   - zřetelnější ikona na různých pozadích

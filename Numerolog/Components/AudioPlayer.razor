@@ -1,6 +1,14 @@
-﻿<audio autoplay="@AutoPlay"
-       controls="@ShowControls"
-       loop="@Loop"
-       src="@url">
-    <a href="@url">Zvuk</a>
-</audio>
+﻿@if (Midi) {
+    <midi-player src="@url"
+                 sound-font visualizer="#@MidiId" />
+    <midi-visualizer type="staff" id="@MidiId"
+                     src="@url" />
+}
+else {
+    <audio autoplay="@AutoPlay"
+           controls="@ShowControls"
+           loop="@Loop"
+           src="@url">
+        <a href="@url">Zvuk</a>
+    </audio>
+}

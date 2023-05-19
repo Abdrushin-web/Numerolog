@@ -1,10 +1,12 @@
+using Audiology.Audio;
+using Audiology.Midi;
 using Microsoft.AspNetCore.Components;
 using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Versioning;
 
 namespace Numerolog.Components
 {
-    public abstract partial class AudioPlayer :
+    public partial class AudioPlayer :
         IDisposable
     {
         [Parameter]
@@ -12,7 +14,9 @@ namespace Numerolog.Components
         [Parameter]
         public bool ShowControls { get; set; } = true;
         [Parameter]
-        public bool Loop { get; set; } = false;
+        public IAudioSourceProvider? Provider { get; set; }
+
+        bool Loop => source?.Loop ?? false;
 
         protected override async Task OnParametersSetAsync()
         {
@@ -29,24 +33,31 @@ namespace Numerolog.Components
             initialized = true;
         }
 
+        bool Midi => source?.Type == MidiSource.Type;
+        readonly Guid MidiId = Guid.NewGuid();
+
         async Task Load()
         {
             cancellation?.Cancel();
             cancellation?.Dispose();
             cancellation = new CancellationTokenSource();
-            if (cancellation.IsCancellationRequested)
-                return;
-            var (bytes, type) = await GetAudio(cancellation.Token);
-            if (bytes is null ||
-                bytes.Length == 0 ||
-                string.IsNullOrWhiteSpace(type) ||
+            source = null;
+            url = null;
+            if (Provider is null ||
                 cancellation.IsCancellationRequested) {
-                url = null;
-            } else
-                url = GetUrl(bytes, type);
+                return;
+            }
+            try {
+                source = await Provider.GetAudioSource(cancellation.Token);
+                if (source is not null &&
+                    !cancellation.IsCancellationRequested) {
+                    url = GetUrl(source.Bytes, source.Type);
+                }
+            }
+            catch (OperationCanceledException) {
+                // ok
+            }
         }
-
-        protected abstract Task<(byte[]? bytes, string? type)> GetAudio(CancellationToken cancellation);
 
         [JSImport(nameof(GetUrl), nameof(AudioPlayer))]
         private static partial string GetUrl(byte[] bytes, string type);
@@ -55,6 +66,7 @@ namespace Numerolog.Components
 
         string? url;
         CancellationTokenSource? cancellation;
-        private bool initialized;
+        bool initialized;
+        AudioSource? source;
     }
 }
