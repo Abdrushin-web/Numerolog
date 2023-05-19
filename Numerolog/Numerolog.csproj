@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\SamplePlayer.js" />
-    <None Include="wwwroot\SamplePlayer.js.map" />
+    <None Include="wwwroot\AudioPlayer.js" />
+    <None Include="wwwroot\AudioPlayer.js.map" />
   </ItemGroup>
 
   <ItemGroup>

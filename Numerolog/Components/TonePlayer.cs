@@ -21,18 +21,22 @@ namespace Numerolog.Components
         [Parameter]
         public TimeSpan Duration { get; set; }
 
-        public static readonly TimeSpan DefaultDuration = TimeSpan.FromSeconds(5);
+        public static readonly TimeSpan DefaultDuration = TimeSpan.FromSeconds(1);
 
-        protected override bool Loop => Duration <= TimeSpan.Zero;
+        bool HasDefaultDuration => Duration <= TimeSpan.Zero;
 
         protected override Task<ISampleProvider?> GetSample(CancellationToken cancellation)
         {
             var duration = Duration;
-            if (Loop)
+            Loop = HasDefaultDuration;
+            if (HasDefaultDuration)
                 duration = DefaultDuration;
             ISampleProvider? result;
-            if (Frequencies?.Any() == true)
-                result = Frequencies.Tones(duration, gain: Gain);
+            if (Frequencies?.Any() == true) {
+                result = Frequencies.
+                    Tones(duration, gain: Gain).
+                    FollowedBy(Frequencies.Tones(duration, false, Gain));
+            }
             else {
                 var frequency = Frequency;
                 if (frequency <= 0)
