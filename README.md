@@ -20,13 +20,14 @@ Existuje podobná a propracovanější aplikace od Juraje Sitára [Nová Numerol
 | [/ColorSpectra](https://numerolog.vzestup.net/ColorSpectra) | Test barevných spekter |
 | [/ColorMixers](https://numerolog.vzestup.net/ColorMixers) | Test slučování barev |
 | [/Tones](https://numerolog.vzestup.net/Tones) | Test zvukových tónů |
+| [/HarmonicTones](https://numerolog.vzestup.net/HarmonicTones) | Test harmonických tónů |
 
 ## Historie
 
-- 2023.5.22
+- 2023.6.4
   - základní testování
     -  barevných spekter a slučování barev
-    -  zvukových tónů pomocí MIDI/WAV syntézy
+    -  zvukových a harmonických tónů pomocí MIDI/WAV syntézy
   - zadávání názvu je při větších výpočtech plynulejší
   - výsledné trojčíslí a číslo v titulku stránky
   - zřetelnější ikona na různých pozadích

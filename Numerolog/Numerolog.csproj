@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Audiology\Audiology.csproj" />
     <ProjectReference Include="..\Colorology\Colorology.csproj" />
+    <ProjectReference Include="..\Harmonology\Harmonology.csproj" />
     <ProjectReference Include="..\Numerology\Numerology.csproj" />
   </ItemGroup>
 

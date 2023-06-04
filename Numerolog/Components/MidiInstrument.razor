@@ -1,0 +1,19 @@
+﻿@inject HttpClient? Http
+
+<div class="mb-1">
+    <label>
+        Zesílení:
+        <InputNumber @bind-Value="Gain"
+                     min="0"
+                     max="1"
+                     step="0.01" />
+    </label>
+    <label>
+        Nástroj:
+        <InputSelect @bind-Value="Instrument">
+            @foreach (var instrument in Instruments) {
+                <option value="@instrument">@instrument</option>
+            }
+        </InputSelect>
+    </label>
+</div>

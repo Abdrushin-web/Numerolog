@@ -13,4 +13,14 @@
 
         protected abstract T DoGetValue(double degree);
     }
+
+
+    public static class CircularSpectrum
+    {
+        public static void ValidateName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
+        }
+    }
 }

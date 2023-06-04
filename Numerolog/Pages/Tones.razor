@@ -1,56 +1,24 @@
 ﻿@page "/Tones"
-@inject HttpClient? Http
+@inherits MidiInstrument
 
 <h1>Tóny</h1>
 
+@base.BuildRenderTree
+
 <div class="mb-1">
-    <label>
-        Zesílení:
-        <InputNumber @bind-Value="gain"
-                     min="0"
-                     max="1"
-                     step="0.01" />
-    </label>
-    <label>
-        Nástroj:
-        <InputSelect @bind-Value="instrument">
-            @foreach (var instrument in Instruments) {
-                <option value="@instrument">@instrument</option>
-            }
-        </InputSelect>
-    </label>
-</div>
-<div class="mb-1">
-    <label>
-        Frekvence [Hz]:
-        <InputNumber @bind-Value="frequency"
-                     min="@MinFrequency"
-                     max="@MaxFrequency" />
-    </label>
+    <FrequencyInput @bind-Value="frequency"/>
 </div>
 
 <AudioPlayer Provider="FrequencyProvider" />
 
 <fieldset class="mb-1">
     Akord:
-    <label>
-        Frekvence 1 [Hz]:
-        <InputNumber @bind-Value="frequency1"
-                     min="@MinFrequency"
-                     max="@MaxFrequency" />
-    </label>
-    <label>
-        Frekvence 2 [Hz]:
-        <InputNumber @bind-Value="frequency2"
-                     min="@MinFrequency"
-                     max="@MaxFrequency" />
-    </label>
-    <label>
-        Frekvence 3 [Hz]:
-        <InputNumber @bind-Value="frequency3"
-                     min="@MinFrequency"
-                     max="@MaxFrequency" />
-    </label>
+    <FrequencyInput @bind-Value="frequency1"
+                    NameNumber="1"/>
+    <FrequencyInput @bind-Value="frequency2"
+                    NameNumber="2" />
+    <FrequencyInput @bind-Value="frequency3"
+                    NameNumber="3" />
 </fieldset>
 
 <AudioPlayer Provider="ChordProvider" />

@@ -1,0 +1,40 @@
+﻿@page "/HarmonicTones"
+@inherits MidiInstrument
+
+<h1>Harmonické tóny</h1>
+
+@base.BuildRenderTree
+
+<div class="mb-1">
+    <FrequencyInput @bind-Value="baseFrequency"
+                    Name="Základní frekvence" />
+    <label>
+        Počet harmonických tónů:
+        <InputNumber @bind-Value="count"
+                     min="1" />
+    </label>
+</div>
+
+<AudioPlayer Provider="CreateToneProvider()" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Pořadí</td>
+            <td>Frekvence [Hz]</td>
+            <td>Poměr</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int order = 1;
+            foreach (var item in frequencyFactors!) {
+                <tr>
+                    <td>@(order++)</td>
+                    <td>@item.frequency.ToString("f2")</td>
+                    <td>@item.factor</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

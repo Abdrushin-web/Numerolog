@@ -10,8 +10,7 @@ namespace Colorology.Spectra
     {
         public InterpolatedCircularSpectrum(string name, [NotNull] IRGBInterpolation interpolation, params RGBColor[] colors)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
+            CircularSpectrum.ValidateName(name);
             if (colors is null)
                 throw new ArgumentNullException(nameof(colors));
             if (colors.Length == 0)

@@ -1,0 +1,13 @@
+﻿@inherits InputNumber<double>
+
+<label>
+    @Name @NameNumberText [Hz]:
+    <input type="number"
+           @attributes="AdditionalAttributes"
+           class="@CssClass"
+           @bind="CurrentValueAsString"
+           @bind:event="onchange"
+           step="@Step"
+           min="@Min"
+           max="@Max" />
+</label>

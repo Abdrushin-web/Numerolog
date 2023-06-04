@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audiology", "Audiology\Audi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Melanchall.DryWetMidi", "drywetmidi\DryWetMidi\Melanchall.DryWetMidi.csproj", "{5EC15DCD-ACEC-447F-8072-9A0B234ABC23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudiologyTests", "AudiologyTests\AudiologyTests.csproj", "{1F77986B-79E8-4007-BDB3-1CD0363516D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudiologyTests", "AudiologyTests\AudiologyTests.csproj", "{1F77986B-79E8-4007-BDB3-1CD0363516D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
